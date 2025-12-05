@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+cards:
+  message: "Welcome to akhilfrancis cards related Prod APIs "
+  contactDetails:
+    name: "Akhil Francis - Prod"
+    email: "akhilfrancis"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345

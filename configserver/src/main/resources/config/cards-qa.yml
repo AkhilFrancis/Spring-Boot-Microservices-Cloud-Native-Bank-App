@@ -1,0 +1,11 @@
+build:
+  version: "2.0"
+
+cards:
+  message: "Welcome to akhilfrancis cards related QA APIs "
+  contactDetails:
+    name: "Akhil Francis - QA"
+    email: "akhilfrancis"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345
