@@ -45,7 +45,7 @@ public class CardsController {
     private Environment environment;
 
     @Autowired
-    private CardsContactInfoDto accountsContactInfoDto;
+    private CardsContactInfoDto cardsContactInfoDto;
 
     @Operation(
             summary = "Create Card REST API",
@@ -238,6 +238,6 @@ public class CardsController {
     )
     @GetMapping("/contact-info")
     public ResponseEntity<CardsContactInfoDto> getContactInfo() {
-        return ResponseEntity.status(HttpStatus.OK).body(accountsContactInfoDto);
+        return ResponseEntity.status(HttpStatus.OK).body(cardsContactInfoDto);
     }
 }
