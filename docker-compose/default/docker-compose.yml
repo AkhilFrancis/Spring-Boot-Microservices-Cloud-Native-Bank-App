@@ -67,6 +67,8 @@ services:
     container_name: accounts-ms
     ports:
       - "8080:8080"
+    healthcheck:
+      test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
     depends_on:
       accountsdb:
         condition: service_healthy
@@ -84,6 +86,8 @@ services:
     container_name: loans-ms
     ports:
       - "8090:8090"
+    healthcheck:
+      test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
     depends_on:
       loansdb:
         condition: service_healthy
@@ -101,6 +105,8 @@ services:
     container_name: cards-ms
     ports:
       - "9000:9000"
+    healthcheck:
+      test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
     depends_on:
       cardsdb:
         condition: service_healthy
@@ -112,6 +118,27 @@ services:
     extends:
       file: common-config.yml
       service: microservice-eureka-config
+
+  gatewayserver:
+    image: "akhilfrancis7/gatewayserver:s9"
+    container_name: gatewayserver-ms
+    ports:
+      - "8072:8072"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      accounts:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+    environment:
+      SPRING_APPLICATION_NAME: "gatewayserver"
+    extends:
+      file: common-config.yml
+      service: microservice-eureka-config
+
 
   eurekaserver:
     image: "akhilfrancis7/eurekaserver:s9"
