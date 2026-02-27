@@ -21,6 +21,21 @@ spring:
     port: 5672
     username: "guest"
     password: "guest"
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
+resilience4j.circuitbreaker:
+  configs:
+    #    here default means this config applies to all circuit breakers . If I give a name instead of default then only
+    #    that ciruit breaker will behave with that config
+    default:
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 2
+      failureRateThreshold: 50
+      waitDurationInOpenState: 10000
+
 
 management:
   endpoints:
