@@ -1,6 +1,9 @@
 package com.akhilfrancis.accounts.controller;
 
-import com.akhilfrancis.accounts.dto.AccountsContactInfoDto;
+import java.util.concurrent.TimeoutException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -18,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.akhilfrancis.accounts.constants.AccountsConstants;
+import com.akhilfrancis.accounts.dto.AccountsContactInfoDto;
 import com.akhilfrancis.accounts.dto.CustomerDto;
 import com.akhilfrancis.accounts.dto.ErrorResponseDto;
 import com.akhilfrancis.accounts.dto.ResponseDto;
 import com.akhilfrancis.accounts.service.IAccountsService;
 
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -35,6 +40,8 @@ import jakarta.validation.constraints.Pattern;
 @RequestMapping(path="/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @Validated
 public class AccountsController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AccountsController.class);
 
     private final IAccountsService accountsService;
 
@@ -116,9 +123,18 @@ public class AccountsController {
             )
     }
     )
+    @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
     @GetMapping("/build-info")
-    public ResponseEntity<String> getBuildInfo() {
-        return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    public ResponseEntity<String> getBuildInfo() throws TimeoutException {
+        LOGGER.debug("getBuildInfo invoked");
+        // throw new TimeoutException();
+//        throw new NullPointerException();
+       return ResponseEntity.status(HttpStatus.OK).body(buildVersion);
+    }
+
+    public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
+        LOGGER.debug("getBuildInfoFallback invoked");
+        return ResponseEntity.status(HttpStatus.OK).body("0.1");
     }
 
     @Operation(
