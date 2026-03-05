@@ -2,6 +2,7 @@ package com.akhilfrancis.accounts.controller;
 
 import java.util.concurrent.TimeoutException;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,9 +156,14 @@ public class AccountsController {
             )
     }
     )
+    @RateLimiter(name="getJavaVersion", fallbackMethod = "getJavaVersionFallback")
     @GetMapping("/java-version")
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity.status(HttpStatus.OK).body(environment.getProperty("JAVA_HOME"));
+    }
+
+    public ResponseEntity<String> getJavaVersionFallback(Throwable throwable) {
+        return ResponseEntity.status(HttpStatus.OK).body("Java 21");
     }
 
     @Operation(
