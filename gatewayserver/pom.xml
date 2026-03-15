@@ -92,7 +92,7 @@
                 <version>3.5.1</version>
                 <configuration>
                     <to>
-                        <image>akhilfrancis7/${project.artifactId}:s10</image>
+                        <image>akhilfrancis7/${project.artifactId}:s11</image>
                     </to>
                 </configuration>
             </plugin>
