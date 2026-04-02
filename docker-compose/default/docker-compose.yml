@@ -272,7 +272,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "akhilfrancis7/configserver:s11"
+    image: "akhilfrancis7/configserver:s12"
     container_name: configserver-ms
     ports:
       - "8071:8071"
@@ -292,7 +292,7 @@ services:
       OTEL_SERVICE_NAME: "configserver"
 
   accounts:
-    image: "akhilfrancis7/accounts:s11"
+    image: "akhilfrancis7/accounts:s12"
     container_name: accounts-ms
     ports:
       - "8080:8080"
@@ -312,7 +312,7 @@ services:
       service: microservice-eureka-config
 
   loans:
-    image: "akhilfrancis7/loans:s11"
+    image: "akhilfrancis7/loans:s12"
     container_name: loans-ms
     ports:
       - "8090:8090"
@@ -332,7 +332,7 @@ services:
       service: microservice-eureka-config
 
   cards:
-    image: "akhilfrancis7/cards:s11"
+    image: "akhilfrancis7/cards:s12"
     container_name: cards-ms
     ports:
       - "9000:9000"
@@ -352,7 +352,7 @@ services:
       service: microservice-eureka-config
 
   gatewayserver:
-    image: "akhilfrancis7/gatewayserver:s11"
+    image: "akhilfrancis7/gatewayserver:s12"
     container_name: gatewayserver-ms
     ports:
       - "8072:8072"
@@ -380,7 +380,7 @@ services:
 
 
   eurekaserver:
-    image: "akhilfrancis7/eurekaserver:s11"
+    image: "akhilfrancis7/eurekaserver:s12"
     container_name: eurekaserver-ms
     ports:
       - "8070:8070"
