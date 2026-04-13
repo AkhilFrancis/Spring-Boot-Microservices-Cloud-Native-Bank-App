@@ -1,0 +1,9 @@
+docker-compose/default/.data/
+
+# Ignore compiled Java class files
+**/*.class
+
+# Also ignore generated class directories
+**/bin/**
+**/build/**
+**/target/**
