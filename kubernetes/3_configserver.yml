@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: configserver
-          image: akhilfrancis7/configserver:s14
+          image: eazybytes/configserver:s12 # replace with my image . Currently akhilfrancis7/configserver:s12 not available in registry
           ports:
             - containerPort: 8071
 ---
