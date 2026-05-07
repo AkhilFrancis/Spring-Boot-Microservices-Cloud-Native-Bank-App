@@ -5,7 +5,7 @@ spring:
 #    active: native
     active: git
   rabbitmq:
-    host: "localhost"
+    host: "rabbitmq.default.svc.cluster.local"
     port: 5672
     username: "guest"
     password: "guest"

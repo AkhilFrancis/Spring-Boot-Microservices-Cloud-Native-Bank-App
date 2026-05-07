@@ -7,6 +7,10 @@ data:
   SPRING_PROFILES_ACTIVE: {{ .Values.global.activeProfile }}
   SPRING_CONFIG_IMPORT: {{ .Values.global.configServerURL }}
   EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: {{ .Values.global.eurekaServerURL }}
+  SPRING_RABBITMQ_HOST: {{ .Values.global.rabbitmqHost }}
+  SPRING_RABBITMQ_PORT: {{ .Values.global.rabbitmqPort | quote }}
+  SPRING_RABBITMQ_USERNAME: {{ .Values.global.rabbitmqUsername }}
+  SPRING_RABBITMQ_PASSWORD: {{ .Values.global.rabbitmqPassword }}
   SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_JWK-SET-URI: {{ .Values.global.keyCloakURL }}
   JAVA_TOOL_OPTIONS: {{ .Values.global.openTelemetryJavaAgent }}
   OTEL_EXPORTER_OTLP_ENDPOINT: {{ .Values.global.otelExporterEndPoint }}

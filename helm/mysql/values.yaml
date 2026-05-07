@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: mysql
+  tag: "8.0"
+  pullPolicy: IfNotPresent
+
+auth:
+  rootPassword: root
+
+databases:
+  - accountsdb
+  - loansdb
+  - cardsdb
+
+service:
+  type: ClusterIP
+  port: 3306
+
+resources: {}
