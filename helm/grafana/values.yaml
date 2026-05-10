@@ -21,9 +21,15 @@ datasources:
   tempo:
     url: http://tempo.default.svc.cluster.local:3100
   loki:
-    url: http://loki-gateway.default.svc.cluster.local
+    url: http://loki-read.default.svc.cluster.local:3100
 
-resources: {}
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
 
 nodeSelector: {}
 
