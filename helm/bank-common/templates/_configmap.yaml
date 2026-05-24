@@ -6,7 +6,7 @@ metadata:
 data:
   SPRING_PROFILES_ACTIVE: {{ .Values.global.activeProfile }}
   SPRING_CONFIG_IMPORT: {{ .Values.global.configServerURL }}
-  EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: {{ .Values.global.eurekaServerURL }}
+  SPRING.CLOUD.KUBERNETES.DISCOVERY.DISCOVERY-SERVER-URL: {{ .Values.global.discoveryServerURL }}
   SPRING_RABBITMQ_HOST: {{ .Values.global.rabbitmqHost }}
   SPRING_RABBITMQ_PORT: {{ .Values.global.rabbitmqPort | quote }}
   SPRING_RABBITMQ_USERNAME: {{ .Values.global.rabbitmqUsername }}
