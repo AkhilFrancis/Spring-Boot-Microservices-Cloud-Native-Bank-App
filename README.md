@@ -1,6 +1,6 @@
 # Spring Boot Microservices Cloud Native Bank App
 
-A cloud-native app built as a microservices system using Spring Boot and Spring Cloud. This repository was developed as a hands-on implementation while learning from the Udemy course "Master Microservices with SpringBoot,Docker,Kubernetes".
+A cloud-native mini project built as a microservices system using Spring Boot and Spring Cloud. This repository was developed as a hands-on implementation while learning from the Udemy course "Master Microservices with SpringBoot,Docker,Kubernetes".
 
 ## Why This Project
 This project helped me move from theory to real implementation. Along the way, I learned not only what to build, but also what I did not know I did not know about distributed systems, deployment workflows, and production concerns.
@@ -12,22 +12,27 @@ flowchart LR
     GW --> ACC[Accounts Service]
     GW --> CRS[Cards Service]
     GW --> LNS[Loans Service]
+    ACC --> MSG[Message Service]
 
     ACC --> DB1[(MySQL)]
     CRS --> DB2[(MySQL)]
     LNS --> DB3[(MySQL)]
 
     ACC --> KFK[Kafka]
+    MSG --> KFK
     ACC --> RBT[RabbitMQ]
+    MSG --> RBT
     CRS --> RBT
     LNS --> RBT
 
     ACC --> CFG[Config Server]
+    MSG --> CFG
     CRS --> CFG
     LNS --> CFG
     GW --> CFG
 
     ACC --> EUR[Eureka Server]
+    MSG --> EUR
     CRS --> EUR
     LNS --> EUR
     GW --> EUR
