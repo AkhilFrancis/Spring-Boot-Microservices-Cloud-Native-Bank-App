@@ -1,6 +1,6 @@
 # Spring Boot Microservices Cloud Native Bank App
 
-A cloud-native banking platform built as a microservices system using Spring Boot and Spring Cloud. This repository was developed as a hands-on implementation while learning from the Udemy course "[NEW] Master Microservices with SpringBoot,Docker,Kubernetes".
+A cloud-native app built as a microservices system using Spring Boot and Spring Cloud. This repository was developed as a hands-on implementation while learning from the Udemy course "Master Microservices with SpringBoot,Docker,Kubernetes".
 
 ## Why This Project
 This project helped me move from theory to real implementation. Along the way, I learned not only what to build, but also what I did not know I did not know about distributed systems, deployment workflows, and production concerns.
@@ -133,20 +133,6 @@ helm upgrade --install dev-env . -n dev -f values.yaml --create-namespace
 
 Use equivalent folders for QA and PROD environments.
 
-## Screenshots
-Add screenshots to make the project easier to assess for recruiters and engineering managers.
-
-Suggested screenshots:
-- API Gateway route response
-- Eureka dashboard with registered services
-- Kubernetes pods/services state
-- Distributed trace in Tempo/Grafana
-
-You can create a folder like `docs/screenshots/` and embed images here:
-```markdown
-![Gateway response](docs/screenshots/gateway-response.png)
-![Kubernetes pods](docs/screenshots/k8s-pods.png)
-```
 
 ## Kubectl Essential Commands
 ### Dashboard
