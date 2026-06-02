@@ -17,6 +17,7 @@ flowchart LR
     CRS --> DB2[(MySQL)]
     LNS --> DB3[(MySQL)]
 
+    ACC --> KFK[Kafka]
     ACC --> RBT[RabbitMQ]
     CRS --> RBT
     LNS --> RBT
@@ -44,6 +45,7 @@ flowchart LR
 - Kubernetes
 - Helm
 - MySQL
+- Apache Kafka
 - RabbitMQ
 - OpenTelemetry and Tempo (tracing)
 
@@ -62,6 +64,7 @@ flowchart LR
 - Centralized externalized configuration via Config Server
 - Service registration and discovery via Eureka
 - API routing and edge concerns via Gateway Server
+- Event-driven integration support via Kafka
 - Containerized services with Docker
 - Kubernetes-ready manifests and Helm-based deployments
 - Environment-specific deployment options (dev, qa, prod)
