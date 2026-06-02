@@ -19,7 +19,7 @@ flowchart TB
 			GW --> EUR
 		end
 
-		subgraph CORE[Core Banking Microservices]
+		subgraph CORE[Bank Microservices]
 			direction LR
 			LOANS[Loans Service]
 			ACC[Accounts Service]
