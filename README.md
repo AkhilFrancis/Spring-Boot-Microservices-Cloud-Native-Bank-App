@@ -8,14 +8,18 @@ This project helped me move from theory to real implementation. Along the way, I
 ## Architecture Diagram
 ```mermaid
 flowchart TB
-	EXT[External Traffic and Client Apps]
-	GW[Gateway<br/>Spring Cloud Gateway<br/>Secured with OAuth2 and OpenID]
-	EUR[Eureka Server<br/>Service Discovery and Registration]
+	EXT[External Clients and APIs]
 
 	subgraph K8S[Kubernetes Cluster]
 		direction TB
 
-		subgraph NET[Microservice Network]
+		subgraph EDGE[Edge Layer]
+			GW[Gateway Server\nSpring Cloud Gateway\nOAuth2 and OpenID secured]
+			EUR[Eureka Server\nService Discovery and Registration]
+			GW --> EUR
+		end
+
+		subgraph CORE[Core Banking Microservices]
 			direction LR
 			LOANS[Loans Service]
 			ACC[Accounts Service]
@@ -24,22 +28,35 @@ flowchart TB
 			ACC <--> CARDS
 		end
 
-		BROKER[Event Broker<br/>Kafka and RabbitMQ]
-		MSG[Message Service]
-		OBS[Observability and Monitoring<br/>Prometheus, Grafana, OpenTelemetry]
+		subgraph ASYNC[Asynchronous Communication]
+			direction TB
+			BROKER[Event Broker\nKafka and RabbitMQ]
+			MSG[Message Service]
+		end
+
+		OBS[Observability Stack\nOpenTelemetry, Prometheus, Grafana, Tempo]
 	end
 
-	EXT <--> GW
-	GW <--> ACC
-	GW --> EUR
+	EXT <--> |Sync| GW
+	GW <--> |Sync| ACC
 
-	ACC -. Async Events .-> BROKER
-	BROKER -. Async Events .-> MSG
+	ACC -. Async events .-> BROKER
+	BROKER -. Async events .-> MSG
 
 	ACC --> OBS
 	CARDS --> OBS
 	LOANS --> OBS
 	MSG --> OBS
+
+	classDef platform fill:#f6f8fa,stroke:#6b7280,stroke-width:1px,color:#111827;
+	classDef service fill:#eaf3ff,stroke:#2563eb,stroke-width:1px,color:#111827;
+	classDef async fill:#fff7ed,stroke:#f97316,stroke-width:1px,color:#111827;
+	classDef observability fill:#ecfeff,stroke:#0891b2,stroke-width:1px,color:#111827;
+
+	class EXT,GW,EUR platform;
+	class LOANS,ACC,CARDS,MSG service;
+	class BROKER async;
+	class OBS observability;
 ```
 
 ## Technologies Used
