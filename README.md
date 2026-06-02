@@ -2,8 +2,6 @@
 
 A cloud-native mini project built as a microservices system using Spring Boot and Spring Cloud. This repository was developed as a hands-on implementation while learning from the Udemy course "Master Microservices with SpringBoot,Docker,Kubernetes".
 
-## Why This Project
-This project helped me move from theory to real implementation. Along the way, I learned not only what to build, but also what I did not know I did not know about distributed systems, deployment workflows, and production concerns.
 
 ## Architecture Diagram
 ```mermaid
