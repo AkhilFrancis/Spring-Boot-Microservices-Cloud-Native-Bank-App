@@ -7,37 +7,39 @@ This project helped me move from theory to real implementation. Along the way, I
 
 ## Architecture Diagram
 ```mermaid
-flowchart LR
-    U[Client / Frontend] --> GW[Gateway Server]
-    GW --> ACC[Accounts Service]
-    GW --> CRS[Cards Service]
-    GW --> LNS[Loans Service]
-    ACC --> MSG[Message Service]
+flowchart TB
+	EXT[External Traffic and Client Apps]
+	GW[Gateway<br/>Spring Cloud Gateway<br/>Secured with OAuth2 and OpenID]
+	EUR[Eureka Server<br/>Service Discovery and Registration]
 
-    ACC --> DB1[(MySQL)]
-    CRS --> DB2[(MySQL)]
-    LNS --> DB3[(MySQL)]
+	subgraph K8S[Kubernetes Cluster]
+		direction TB
 
-    ACC --> KFK[Kafka]
-    MSG --> KFK
-    ACC --> RBT[RabbitMQ]
-    MSG --> RBT
-    CRS --> RBT
-    LNS --> RBT
+		subgraph NET[Microservice Network]
+			direction LR
+			LOANS[Loans Service]
+			ACC[Accounts Service]
+			CARDS[Cards Service]
+			LOANS <--> ACC
+			ACC <--> CARDS
+		end
 
-    ACC --> CFG[Config Server]
-    MSG --> CFG
-    CRS --> CFG
-    LNS --> CFG
-    GW --> CFG
+		BROKER[Event Broker<br/>Kafka and RabbitMQ]
+		MSG[Message Service]
+		OBS[Observability and Monitoring<br/>Prometheus, Grafana, OpenTelemetry]
+	end
 
-    ACC --> EUR[Eureka Server]
-    MSG --> EUR
-    CRS --> EUR
-    LNS --> EUR
-    GW --> EUR
+	EXT <--> GW
+	GW <--> ACC
+	GW --> EUR
 
-    OTEL[OpenTelemetry Agent] --> TMP[Tempo]
+	ACC -. Async Events .-> BROKER
+	BROKER -. Async Events .-> MSG
+
+	ACC --> OBS
+	CARDS --> OBS
+	LOANS --> OBS
+	MSG --> OBS
 ```
 
 ## Technologies Used
